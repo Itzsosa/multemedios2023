@@ -14,42 +14,77 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container">
     <header>
-      <!-- place navbar here -->
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">PaginasWebCr APIS</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="listaCursos.html">Cursos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="listaEstudiantes.html">Estudiantes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="listaProfesores.html">Profesores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="listaUsuarios.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="listaGrupos.html">Grupos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="crearCurso.html" aria-current="page">Crear Curso<span
+                    class="visually-hidden">(current)</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
     </header>
     <main>
-      <td scope="row">${valor.id}</td>
-      <td>${valor.nombre}</td>
-      <td>${valor.descripcion}</td>
-      <td>${valor.tiempo}</td>
       <form id="formulario">
         <div class="mb-3">
           <label for="" class="form-label">Nombre</label>
           <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
             placeholder="Ingresa el nombre del curso">
-          <small id="helpId" class="form-text text-muted">Nombre aca</small>
+          <small id="helpId1" class="form-text text-muted">Nombre aca</small>
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Descripcion</label>
           <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId"
             placeholder="Ingresa la descripcion del curso">
-          <small id="helpId" class="form-text text-muted">Descripcion aca</small>
+          <small id="helpId2" class="form-text text-muted">Descripcion aca</small>
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Tiempo</label>
           <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
             placeholder="Ingresa el tiempo del curso">
-          <small id="helpId" class="form-text text-muted">Tiempo aca</small>
+          <small id="helpId3" class="form-text text-muted">Tiempo aca</small>
         </div>
         <div class="mb-3">
-          <button type="reset" class="btn btn-danger">Limpiar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="reset" class="btn btn-danger">Limpiar</button>
         </div>
       </form>
     </main>
-    <footer>
+    <footer class="text-muted py-5">
       <!-- place footer here -->
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Josue Sosa Araya &copy; Bootstrap</p>
+      </div>
     </footer>
   </div>
 
@@ -62,31 +97,52 @@
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
 
-    <script>
-      var fromulario = document.getElementById('formulario');
+  <script>
+    var fromulario = document.getElementById('formulario');
 
-      fromulario.addEventListener('submit', function(e){
-        alert('Salvando');
-        e.preventDefault();
-        var datosEnviar={
-          nombre:"Josue Sosa",  
-          descripcion:"React Junior", 
-          tiempo:"10 Meses", 
-          usuario:"Itzsosa" 
-        }
-        console.log(datosEnviar);
-        fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarCursos.php",
+    fromulario.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Obtener los valores de los campos de entrada
+      let nombre = document.getElementById("nombre").value;
+      let descripcion = document.getElementById("descripcion").value;
+      let tiempo = document.getElementById("tiempo").value;
+
+      var datosEnviar = {
+        nombre: nombre,
+        descripcion: descripcion,
+        tiempo: tiempo,
+        usuario: "Itzsosa"
+      };
+
+      if (nombre.trim() === "" || descripcion.trim() === "" || tiempo.trim() === "") {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
+      console.log(datosEnviar);
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/InsertarCursos.php",
         {
-          method:'POST',
-          body:JSON.stringify(datosEnviar)
-        }).then((respuesta) => respuesta.json()) //recibe los datos em formato json
-        .then((datosrespuesta) => {
-          console.log('Datos', datosrespuesta); //lo envio a la funcion de abajo
-          
+          method: 'POST',
+          body: JSON.stringify(datosEnviar)
+        }).then(function (response) {
+          //Manejo la respuesta de la API
+          if (response.ok) {
+            alert("Datos enviados correctamente.");
+            document.getElementById("nombre").value = "";
+            document.getElementById("descripcion").value = "";
+            document.getElementById("tiempo").value = "";
+          } else {
+            alert("Error al enviar los datos.");
+          }
         })
-        .catch(console.log);
-      })
-    </script>
+        .catch(function (error) {
+          console.log(error);
+          alert("Error al enviar los datos Catch");
+        });
+
+
+    });
+  </script>
 </body>
 
 </html>
