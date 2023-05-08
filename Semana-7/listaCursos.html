@@ -60,6 +60,7 @@
               <th>Descripcion</th>
               <th>Tiempo</th>
               <th>Usuario</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="resultados" class="table-group-divider"></tbody>
@@ -77,6 +78,56 @@
       </div>
     </footer>
   </div>
+
+  <!-- Modal Body -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Modificar curso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formulario">
+            <div class="mb-3">
+              <label for="" class="form-label">Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
+                placeholder="Ingresa el nombre del curso">
+              <small id="helpId1" class="form-text text-muted">Nombre aca</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Descripcion</label>
+              <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId"
+                placeholder="Ingresa la descripcion del curso">
+              <small id="helpId2" class="form-text text-muted">Descripcion aca</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Tiempo</label>
+              <input type="text" class="form-control" name="tiempo" id="tiempo" aria-describedby="helpId"
+                placeholder="Ingresa el tiempo del curso">
+              <small id="helpId3" class="form-text text-muted">Tiempo aca</small>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="reset" class="btn btn-danger">Limpiar</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Optional: Place to the bottom of scripts -->
+  <!-- <script>
+
+  </script> -->
   <!-- {"id":"377","nombre":"hola leo","descripcion":"sdsd","tiempo":"asasa"}, -->
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -105,7 +156,7 @@
       console.log("Datos", datos);
 
       for (const valor of datos) {
-        console.log("valor", valor);
+        //console.log("valor", valor);
         contenidoTablaResultado.innerHTML += `
           <tr class="table-primary">
             <td scope="row">${valor.id}</td>
@@ -113,10 +164,38 @@
             <td>${valor.descripcion}</td>
             <td>${valor.tiempo}</td>
             <td>${valor.usuario}</td>
+            <td>
+              <button type="button" class="btn btn-danger" onClick="borrarCurso(${valor.id})">Borrar</button>
+              ||
+              <button type="button" class="btn btn-primary" 
+              onClick="modificarCurso('${valor.id}','${valor.nombre}','${valor.descripcion}','${valor.tiempo}')"
+              >Editar</button>
+            </td>
           </tr>`;
       }
     }
 
+    //, nombre, descripcion, tiempo,usuario
+    function modificarCurso(id,nombre,descripcion,tiempo,) {
+
+      const myModal = new bootstrap.Modal(document.getElementById('modalId'))
+      myModal.show();
+
+      document.getElementById("nombre").value = nombre;
+      document.getElementById("descripcion").value =descripcion;
+      document.getElementById("tiempo").value = tiempo;
+
+      
+    }
+
+    function borrarCurso(id) {
+      // fetch('https://paginas-web-cr.com/ApiPHP/apis/BorrarCursos.php/' + id, {
+      //   method: 'DELETE',
+      // })
+      //   .then(res => res.json()) // or res.json()
+      //   .then(res => console.log(res))
+      alert("Josue " + id)
+    }
     cargarDatos();
   </script>
 </body>
