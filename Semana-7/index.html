@@ -13,40 +13,8 @@
 
 </head>
 
-<footer>
-  <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Lista de Elementos</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="listaCursos.html">Cursos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="listaEstudiantes.html">Estudiantes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="listaProfesores.html">Profesores</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="listaUsuarios.html">Usuarios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="listaGrupos.html">Grupos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="crearCurso.html">Crear Cursos</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<body>
+  <header id="headerParcial">
 
   </header>
   <main>
@@ -54,25 +22,22 @@
     <div class="p-5 mb-4 bg-light rounded-3">
       <div class="container py-5">
         <h1 class="display-5 fw-bold">PaginasWebCr API</h1>
-        <p class="col-md-8 fs-4">En esta pagina se consumen las APIS de PaginasWebCr,para listar profesores, cursos,
-          estudiantes y usuarios</p>
+        <p class="col-md-8 fs-4">En esta pagina se consumen las APIS de PaginasWebCr,para listar cursos,estudiantes,
+          profesores y grupos</p>
         <a href="https://github.com/Itzsosa" target="_blank" rel="noopener" class="btn btn-dark btn-lg">Github
           Itzsosa</a>
       </div>
     </div>
   </main>
 
-  <footer class="text-muted py-5">
+  <footer class="text-muted py-5" id="footerParcial">
     <!-- place footer here -->
-    <div class="container">
-      <p class="float-end mb-1">
-        <a href="#">Back to top</a>
-      </p>
-      <p class="mb-1">Josue Sosa Araya &copy; Bootstrap</p>
-    </div>
   </footer>
 
   <!-- Bootstrap JavaScript Libraries -->
+  <script src="vistasParciales.js">
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
@@ -80,6 +45,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
-  </body>
+</body>
 
 </html>

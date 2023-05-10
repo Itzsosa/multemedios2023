@@ -13,47 +13,14 @@
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <!-- place navbar here -->
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">Lista de Elementos</a>
-          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="listaCursos.html" aria-current="page">Cursos <span
-                    class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="listaEstudiantes.html">Estudiantes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="listaProfesores.html">Profesores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="listaUsuarios.html">Usuarios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="listaGrupos.html">Grupos</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <div class="container-fluid">
+    <header id="headerParcial"></header>
     <main>
+      <h1>Cursos</h1>
+      <a class="btn btn-primary my-3" href="crearCurso.html" role="button">Crear Curso</a>
       <div class="table-responsive">
         <table class="table table-striped table-hover table-borderless table-primary align-middle">
-          <thead class="table-light">
-            <caption>
-              Table Name
-            </caption>
+          <thead class="table-primary">
             <tr>
               <th>ID</th>
               <th>Nombre</th>
@@ -68,17 +35,10 @@
         </table>
       </div>
     </main>
-    <footer class="text-muted py-5">
-      <!-- place footer here -->
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Josue Sosa &copy; Bootstrap</p>
-      </div>
-    </footer>
-  </div>
+    <footer class="text-muted py-5" id="footerParcial"></footer>
 
+    <!-- Modal Editar -->
+  </div>
   <!-- Modal Body -->
   <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
   <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
@@ -91,6 +51,8 @@
         </div>
         <div class="modal-body">
           <form id="formulario">
+            <input type="hidden" id="cursoId" name="cursoId">
+            <input type="hidden" id="usuario" name="usuario">
             <div class="mb-3">
               <label for="" class="form-label">Nombre</label>
               <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
@@ -110,26 +72,59 @@
               <small id="helpId3" class="form-text text-muted">Tiempo aca</small>
             </div>
             <div class="mb-3">
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary">Editar</button>
               <button type="reset" class="btn btn-danger">Limpiar</button>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Modal Eliminar -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="modalEliminar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="Eliminar">Eliminar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
 
-  <!-- Optional: Place to the bottom of scripts -->
-  <!-- <script>
+          <h5>Seguro que desea eliminar el curso:</h5>
+          <form id="formulario">
+            <div class="mb-3">
+              <label for="" class="form-label">Id</label>
+              <input type="text" class="form-control" name="cursoIdEliminar" id="cursoIdEliminar"
+                aria-describedby="helpId" placeholder="Ingresa el nombre del curso" disabled>
+            </div>
 
-  </script> -->
+            <div class="mb-3">
+              <label for="" class="form-label">Nombre</label>
+              <input type="text" class="form-control" name="nombreEliminar" id="nombreEliminar"
+                aria-describedby="helpId" placeholder="Ingresa el nombre del curso" disabled>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" onclick="borrarCurso()">Aceptar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- {"id":"377","nombre":"hola leo","descripcion":"sdsd","tiempo":"asasa"}, -->
   <!-- Bootstrap JavaScript Libraries -->
+
+  <script src="vistasParciales.js"></script>
+  <script src=""></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
@@ -165,36 +160,109 @@
             <td>${valor.tiempo}</td>
             <td>${valor.usuario}</td>
             <td>
-              <button type="button" class="btn btn-danger" onClick="borrarCurso(${valor.id})">Borrar</button>
-              ||
               <button type="button" class="btn btn-primary" 
-              onClick="modificarCurso('${valor.id}','${valor.nombre}','${valor.descripcion}','${valor.tiempo}')"
-              >Editar</button>
+              onClick="modificarCurso('${valor.id}','${valor.nombre}','${valor.descripcion}','${valor.tiempo}','${valor.usuario}')"
+              >Editar</button> 
+              <button type="button" class="btn btn-danger" onClick="mostrarModalBorrarCurso('${valor.id}','${valor.nombre}')">Borrar</button>
             </td>
           </tr>`;
       }
     }
 
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'))
     //, nombre, descripcion, tiempo,usuario
-    function modificarCurso(id,nombre,descripcion,tiempo,) {
+    function modificarCurso(id, nombre, descripcion, tiempo, usuario) {
 
-      const myModal = new bootstrap.Modal(document.getElementById('modalId'))
       myModal.show();
 
+      document.getElementById("cursoId").value = id;
       document.getElementById("nombre").value = nombre;
-      document.getElementById("descripcion").value =descripcion;
+      document.getElementById("descripcion").value = descripcion;
       document.getElementById("tiempo").value = tiempo;
-
-      
+      document.getElementById("usuario").value = usuario;
     }
 
-    function borrarCurso(id) {
-      // fetch('https://paginas-web-cr.com/ApiPHP/apis/BorrarCursos.php/' + id, {
-      //   method: 'DELETE',
-      // })
-      //   .then(res => res.json()) // or res.json()
-      //   .then(res => console.log(res))
-      alert("Josue " + id)
+    var formulario = document.getElementById('formulario');
+
+    formulario.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Obtener los valores de los campos de entrada
+      let nombre = document.getElementById("nombre").value;
+      let descripcion = document.getElementById("descripcion").value;
+      let tiempo = document.getElementById("tiempo").value;
+      let id = document.getElementById("cursoId").value;
+      let usuario = document.getElementById("usuario").value;
+
+      var datosEnviar = {
+        id: id,
+        nombre: nombre,
+        descripcion: descripcion,
+        tiempo: tiempo,
+        usuario: usuario
+      };
+
+      if (nombre.trim() === "" || descripcion.trim() === "" || tiempo.trim() === "") {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
+      console.log(datosEnviar);
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/ActualizarCursos.php",
+        {
+          method: 'POST',
+          body: JSON.stringify(datosEnviar)
+        }).then(function (response) {
+          //Manejo la respuesta de la API
+          if (response.ok) {
+            alert("Datos modificados correctamente.");
+            myModal.hide(); // Oculta el modal
+            contenidoTablaResultado.innerHTML = ""; // Limpia el contenido de la tabla
+            cargarDatos(); // Vuelve a cargar los datos actualizados
+
+          } else {
+            alert("Error al enviar los datos.");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Error al enviar los datos Catch");
+        });
+    });
+
+    //Se crea el modal fuera de las funciones para apuntar a el modal a la hora de cerrarlo
+    const modalEliminar = new bootstrap.Modal(document.getElementById('modalEliminar'))
+    function mostrarModalBorrarCurso(id, nombre) {
+      modalEliminar.show();
+
+      document.getElementById("cursoIdEliminar").value = id;
+      document.getElementById("nombreEliminar").value = nombre;
+    }
+
+    function borrarCurso() {
+
+      let id = document.getElementById("cursoIdEliminar").value;
+      var datosEnviar = {
+        id: id
+      };
+
+      fetch("https://paginas-web-cr.com/ApiPHP/apis/BorrarCursos.php",
+        {
+          method: 'POST',
+          body: JSON.stringify(datosEnviar)
+        }).then(function (response) {
+          //Manejo la respuesta de la API
+          if (response.ok) {
+            modalEliminar.hide(); // Oculta el modal
+            contenidoTablaResultado.innerHTML = ""; // Limpia el contenido de la tabla
+            cargarDatos(); // Vuelve a cargar los datos actualizados
+          } else {
+            alert("Error al enviar los datos.");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Error al enviar los datos Catch");
+        });
     }
     cargarDatos();
   </script>
